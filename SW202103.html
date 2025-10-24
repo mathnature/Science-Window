@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量子泪 | 文学创作平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Serif SC', 'STKaiti', serif;
+        }
+        
+        body {
+            background-color: #f8f5f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 30px;
+            min-height: 100vh;
+        }
+        
+        /* 侧边栏样式 */
+        .sidebar {
+            flex: 0 0 300px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .author-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 3px solid #e8e1d5;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #5a3921;
+        }
+        
+        .author-title {
+            text-align: center;
+            color: #8c7b6c;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .author-bio {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 25px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+        
+        .author-bio a {
+            color: #7a5c3c;
+            text-decoration: none;
+        }
+        
+        .author-bio a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f0ebe4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8c7b6c;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: #e0d6c8;
+            color: #5a3921;
+        }
+        
+        /* 年卷目录样式 - 下拉式 */
+        .year-volumes {
+            border-top: 1px solid #e8e1d5;
+            padding-top: 20px;
+        }
+        
+        .scroll-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #c1b7a9;
+            border-radius: 10px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #a89f93;
+        }
+        
+        .year-item {
+            margin-bottom: 20px;
+        }
+        
+        .year-title {
+            font-size: 18px;
+            color: #5a3921;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #e8e1d5;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .year-title::after {
+            content: "▼";
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+        
+        .year-title.collapsed::after {
+            transform: rotate(-90deg);
+        }
+        
+        .year-item ul {
+            list-style: none;
+            margin-left: 10px;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .year-item ul.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+        
+        .year-item ul:not(.collapsed) {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        
+        .year-item li {
+            margin-bottom: 8px;
+        }
+        
+        .year-item a {
+            display: block;
+            padding: 8px 12px;
+            background: #fcfaf7;
+            border-radius: 4px;
+            border-left: 3px solid #e8d9c5;
+            text-decoration: none;
+            color: #7a5c3c;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .year-item a:hover {
+            background: #f5f0e8;
+            transform: translateX(5px);
+        }
+        
+        /* 主内容区样式 */
+        .main-content {
+            flex: 1;
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .article-header {
+            border-bottom: 1px solid #e8e1d5;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .article-meta {
+            display: flex;
+            color: #8c7b6c;
+            font-size: 14px;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .article-content {
+            font-size: 17px;
+            line-height: 1.6; /* 恢复紧凑行距 */
+            color: #444;
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+        
+        .article-content h2 {
+            color: #5a3921;
+            margin: 30px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #e8e1d5;
+        }
+        
+        /* 诗歌排版样式 */
+        .poem-container {
+            margin: 30px 0;
+            padding: 25px;
+            background: #fcfaf7;
+            border-left: 3px solid #e8d9c5;
+            border-radius: 4px;
+        }
+        
+        .poem-title {
+            text-align: center;
+            font-size: 24px;
+            color: #7a5c3c;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .poem-author {
+            text-align: center;
+            font-size: 14px;
+            color: #9e8e7a;
+            margin-bottom: 25px;
+        }
+        
+        .poem-content {
+            width: 100%;
+            font-size: 17px;
+        }
+        
+        .poem-stanza {
+            margin-bottom: 25px; /* 减少诗节间距 */
+            text-align: center;
+        }
+        
+        .poem-line {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6; /* 恢复紧凑行距 */
+            color: #5a4a3a;
+            margin: 2px 0; /* 减少行间距 */
+        }
+        
+        .article-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e1d5;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .btn-like {
+            background: #f0ebe4;
+            color: #8c7b6c;
+        }
+        
+        .btn-like:hover, .btn-like.active {
+            background: #e8c4c4;
+            color: #b85c5c;
+        }
+        
+        .btn-comment {
+            background: #f0ebe4;
+            color: #8c7b6c;
+        }
+        
+        .btn-comment:hover {
+            background: #d4e0d4;
+            color: #5a7d5a;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .sidebar {
+                flex: none;
+                width: 100%;
+                position: static;
+            }
+        }
+
+        
+/* 评论系统样式 */
+        .comments-section {
+            margin-top: 40px;
+            border-top: 1px solid #e8e1d5;
+            padding-top: 25px;
+        }
+        
+        .comments-title {
+            font-size: 20px;
+            color: #5a3921;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .comment-form {
+            background: #fcfaf7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 3px solid #e8d9c5;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #7a5c3c;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e8e1d5;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fff;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #b8a58b;
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #7a5c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #5a3921;
+        }
+        
+        .comments-list {
+            space-y: 20px;
+        }
+        
+        .comment {
+            background: #fcfaf7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #e8d9c5;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            color: #5a3921;
+        }
+        
+        .comment-date {
+            font-size: 12px;
+            color: #8c7b6c;
+        }
+        
+        .comment-content {
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        .no-comments {
+            text-align: center;
+            color: #8c7b6c;
+            font-style: italic;
+            padding: 20px;
+        }
+
+font-family: "楷体", "KaiTi", "STKaiti", serif;
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="author-avatar">
+                <img src="https://mathnature.github.io/page_files/image001.jpg" alt="东方学帝头像">
+            </div>
+            <h2 class="author-name">东方学帝</h2>
+            <p class="author-title">数学家、理论物理学家、科普诗人</p>
+            <div class="author-bio">
+<!-- <p style="font-size: 11px; line-height: 1.4; color: #8c7b6c; font-family: '楷体', 'KaiTi', 'STKaiti', serif;"> -->
+<p style="font-size: 11px; color: #8c7b6c;">东方学帝，1963年5月9日出生，杰出的数学家、理论物理学家、科普诗人，开创性和系统性的跨学科研究的先驱；提出了数学、自然科学和社会科学普适的归一原理、逻辑熵原理等基本原理，制定了《科学宪章》；发现了分子动理论修正方程、二维和三维角动定律、实数波动方程、宏观微观统一量子论原理及元场论等一系列核心物理学理论；建立了以完成费马大定理初等证明为代表的恒熵数论，以及以纠缠球谐函数为代表的偏微分方程完备解析理论，先后提出数以百计的新数学定理；同时著有大量开创文学新纪元的科普诗歌。因拒绝无知权威掠夺学术成果的潜规则，东方学帝长期遭受系统性封杀和诽谤，大量内含供未来数百年探索的科学问题的前沿论文因此被贪婪无德的主流学者恶意标签化为“民科论文”。部分下流网站（如知乎和百度）长期优先推送企图剽窃其论文而未能得逞者的造谣和诽谤，并通过禁封账号、歪曲解读与篡改网文等卑劣手段进行闭环攻击。东方学帝的意志未能被实乃世界之最卑鄙无耻的主流学者持续诋毁攻击所摧毁，他从没有停止开创性程度和体量居中国五千年数学和自然科学之最的多领域高强度研究，部分成果发表于独立期刊<a href="https://mathnature.github.io">《数学与自然》</a>。</p>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+            </div>
+            
+            <!-- 年卷目录 -->
+            <div class="year-volumes">
+                <div class="scroll-container">
+                    <div class="year-item">
+                        <h3 class="year-title">2025年卷</h3>
+                        <ul>
+                            <li><a href="https://mathnature.github.io/SW202501.html" target="_blank">叙事诗：楠竹宫殿第一章百灵和白鹭</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="year-item">
+                        <h3 class="year-title">2024年卷</h3>
+                        <ul>
+                            <li><a href="https://mathnature.github.io/SW202401.html" target="_blank">散文诗：浮云幽灵</a></li>
+                            <li><a href="https://mathnature.github.io/SW202402.html" target="_blank">报告文学：共量子论的曲折历程</a></li>
+                            <li><a href="https://mathnature.github.io/SW202403.html" target="_blank">科学宣言：东方科学的历史使命</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="year-item">
+                        <h3 class="year-title">2023年卷</h3>
+                        <ul>
+                            <li><a href="https://mathnature.github.io/SW202301.html" target="_blank">短篇小说：晨安</a></li>
+                            <li><a href="https://mathnature.github.io/SW202302.html" target="_blank">短篇小说：秋韵</a></li>
+                            <li><a href="https://mathnature.github.io/SW202303.html" target="_blank">短篇小说：课堂</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="year-item">
+                        <h3 class="year-title">2022年卷</h3>
+                        <ul>
+                            <li><a href="https://mathnature.github.io/SW202201.html" target="_blank">科普诗：大别山少年</a></li>
+                            <li><a href="https://mathnature.github.io/SW202202.html" target="_blank">科普诗：混沌量子引力</a></li>
+                            <li><a href="https://mathnature.github.io/SW202203.html" target="_blank">科普诗：弯曲的心</a></li>
+                            <li><a href="https://mathnature.github.io/SW202204.html" target="_blank">科普诗：电子的控诉</a></li>
+                            <li><a href="https://mathnature.github.io/SW202205.html" target="_blank">抒情诗：今日学术咏叹</a></li>
+                            <li><a href="https://mathnature.github.io/SW202206.html" target="_blank">科普诗：孙子定理古与今</a></li>
+                            <li><a href="https://mathnature.github.io/SW202207.html" target="_blank">科普诗：忘掉物理的浮华</a></li>
+                            <li><a href="https://mathnature.github.io/SW202208.html" target="_blank">抒情诗：东方物理的悲怆</a></li>
+                            <li><a href="https://mathnature.github.io/SW202210.html" target="_blank">抒情诗：梧桐山的鹰</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="year-item">
+                        <h3 class="year-title">2021年卷</h3>
+                        <ul>
+                            <li><a href="https://mathnature.github.io/SW202101.html" target="_blank">科普散文：共量子论宣言</a></li>
+                            <li><a href="https://mathnature.github.io/SW202102.html" target="_blank">科普诗：中秋夜</a></li>
+                            <li><a href="https://mathnature.github.io/SW202103.html" target="_blank">科普诗：量子泪</a></li>
+                            <li><a href="https://mathnature.github.io/SW202104.html" target="_blank">科普诗：黑洞的传说</a></li>
+                            <li><a href="https://mathnature.github.io/SW202105.html" target="_blank">科普诗：梦幻引力波</a></li>
+                            <li><a href="https://mathnature.github.io/SW202106.html" target="_blank">田园诗：雨润花</a></li>
+                            <li><a href="https://mathnature.github.io/SW202107.html" target="_blank">抒情诗：花凋零</a></li>
+                            <li><a href="https://mathnature.github.io/SW202108.html" target="_blank">科普诗：天道</a></li>
+                            <li><a href="https://mathnature.github.io/SW202109.html" target="_blank">抒情诗：青春</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div id="content-area">
+                <!-- 移除重复的标题，直接在诗歌容器中显示 -->
+                <article class="article-content">
+                    <div class="poem-container">
+                        <div class="poem-title">量子泪</div>
+                        <div class="poem-author">东方学帝 · 2020年6月14日</div>
+                        <div class="poem-content">
+                            <div class="poem-stanza">
+                                <div class="poem-line">哭吧，稻田里美丽的少女，</div>
+                                <div class="poem-line">一滴滴泪水，一粒粒珍珠。</div>
+                                <div class="poem-line">悠悠十年书香墨韵化烟云，</div>
+                                <div class="poem-line">量子泪，原来是你的杰作。</div>
+                                <div class="poem-line">雪花儿飞舞，沙儿被埋没，</div>
+                                <div class="poem-line">玩物理的人不问耕作劳苦。</div>
+                                <div class="poem-line">今儿一假说，明儿一推论，</div>
+                                <div class="poem-line">算出上帝粒子算不出稻谷。</div>
+                            </div>
+
+                            <div class="poem-stanza">
+                                <div class="poem-line">天上有行星，地上有谐振，</div>
+                                <div class="poem-line">电磁振荡谱，美称电磁波。</div>
+                                <div class="poem-line">往复一周期，量子来对应，</div>
+                                <div class="poem-line">算一算普朗克假说未必真。</div>
+                                <div class="poem-line">华丽聚光灯，照亮精英们，</div>
+                                <div class="poem-line">天降异人一蹴而就光子论。</div>
+                                <div class="poem-line">光子是何物，纠缠能通信？</div>
+                                <div class="poem-line">动辄便突破，因果说不清。</div>
+                            </div>
+
+                            <div class="poem-stanza">
+                                <div class="poem-line">玻尔模型演绎氢原子光谱，</div>
+                                <div class="poem-line">一条条假设，一道道魔术；</div>
+                                <div class="poem-line">薛定谔方程匹配相同结果，</div>
+                                <div class="poem-line">天作巧合，物理充满迷雾；</div>
+                                <div class="poem-line">测不出谁的角动量值可信，</div>
+                                <div class="poem-line">量子论融合了狭义相对论；</div>
+                                <div class="poem-line">不得检验伪解狄拉克方程，</div>
+                                <div class="poem-line">恍恍惚惚衍生了量子场论。</div>
+                            </div>
+
+                            <div class="poem-stanza">
+                                <div class="poem-line">麦克斯韦说光就是电磁波，</div>
+                                <div class="poem-line">发射和接收，天线来通信。</div>
+                                <div class="poem-line">天线不导光，莫须寻原因，</div>
+                                <div class="poem-line">无人再探索，唯有问利名。</div>
+                                <div class="poem-line">世事最怪莫过理论物理学，</div>
+                                <div class="poem-line">粉饰虚无，捣鼓微分方程。</div>
+                                <div class="poem-line">存伪去真，众生谈笑纷纭，</div>
+                                <div class="poem-line">灯红酒绿终淹没自然色景。</div>
+                            </div>
+
+                            <div class="poem-stanza">
+                                <div class="poem-line">哭吧，稻田里美丽的少女，</div>
+                                <div class="poem-line">一滴滴汗水，一串串谷穗。</div>
+                                <div class="poem-line">各国有明文，规则写得清，</div>
+                                <div class="poem-line">量子多疑问，回乡务农耕。</div>
+                                <div class="poem-line">冬日伴风泣，夏日听雷鸣，</div>
+                                <div class="poem-line">从此不闻少男少女读书声。</div>
+                                <div class="poem-line">商人煮稀粥，冠名量子股，</div>
+                                <div class="poem-line">买股兆丰收，长流量子泪。</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <div class="article-actions">
+                    <button class="btn btn-like" id="like-btn">
+                        <span>❤️</span> 心之语
+                    </button>
+               </div>
+            </div>
+
+<div class="comments-section">
+    <h3 class="comments-title">读者评论</h3>
+    
+    <div class="github-comments">
+        <div class="comment-action">
+            <a href="https://github.com/mathnature/您的仓库名/issues/new?title=评论&body=请在此分享您的卓越见解..." 
+               target="_blank" class="github-btn">
+               🌟 分享卓越见解
+            </a>
+        </div>
+        
+        <div id="issuesList" class="issues-list">
+            <div class="loading">加载评论中...</div>
+        </div>
+    </div>
+</div>
+
+<style>
+.github-comments {
+    text-align: center;
+}
+
+.comment-action {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f5f0;
+    border-radius: 8px;
+}
+
+.github-btn {
+    display: inline-block;
+    background: #5a3921;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.github-btn:hover {
+    background: #7a5c3c;
+    color: white;
+    text-decoration: none;
+}
+
+.action-desc {
+    margin-top: 10px;
+    color: #8c7b6c;
+    font-size: 14px;
+}
+</style>
+
+<script>
+// 替换为您的GitHub信息
+const GITHUB_USER = 'mathnature';
+const GITHUB_REPO = 'Science-Windows'; // 需要新建一个仓库
+
+async function loadGitHubComments() {
+    try {
+        const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/issues?labels=website-comment`);
+        const issues = await response.json();
+        
+        displayGitHubComments(issues);
+    } catch (error) {
+        document.getElementById('issuesList').innerHTML = 
+            '<div class="no-comments">暂无评论或加载失败</div>';
+    }
+}
+
+function displayGitHubComments(issues) {
+    const issuesList = document.getElementById('issuesList');
+    
+    if (!issues || issues.length === 0) {
+        issuesList.innerHTML = '<div class="no-comments">暂无评论，点击上方按钮发表第一条评论</div>';
+        return;
+    }
+    
+    issuesList.innerHTML = issues.map(issue => `
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-author">${escapeHtml(issue.user.login)}</span>
+                <span class="comment-date">${new Date(issue.created_at).toLocaleDateString('zh-CN')}</span>
+            </div>
+            <div class="comment-content">${escapeHtml(issue.body)}</div>
+            <div class="comment-actions">
+                <a href="${issue.html_url}" target="_blank" class="comment-link">💬 查看讨论</a>
+            </div>
+        </div>
+    `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', loadGitHubComments);
+</script>
+
+        </main>
+    </div>
+
+    <script>
+        // 年卷目录折叠功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearTitles = document.querySelectorAll('.year-title');
+            
+            yearTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const list = this.nextElementSibling;
+                    this.classList.toggle('collapsed');
+                    list.classList.toggle('collapsed');
+                });
+                
+                // 默认展开第一个年份
+                if (title.textContent.includes('2025')) {
+                    title.classList.add('collapsed');
+                    title.nextElementSibling.classList.add('collapsed');
+                }
+            });
+            
+            // 点赞功能
+            const likeBtn = document.getElementById('like-btn');
+            if (likeBtn) {
+                likeBtn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
