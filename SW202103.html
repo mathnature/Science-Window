@@ -559,34 +559,40 @@ a:hover {
         </main>
     </div>
 
-    <script>
-        // 年卷目录折叠功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const yearTitles = document.querySelectorAll('.year-title');
+<script>
+// 年卷目录折叠功能
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearTitles = document.querySelectorAll('.year-title');
+        const currentYear = new Date().getFullYear();
+        
+        yearTitles.forEach(title => {
+            title.addEventListener('click', function() {
+                const list = this.nextElementSibling;
+                this.classList.toggle('collapsed');
+                list.classList.toggle('collapsed');
+            });
             
-            yearTitles.forEach(title => {
-                title.addEventListener('click', function() {
-                    const list = this.nextElementSibling;
-                    this.classList.toggle('collapsed');
-                    list.classList.toggle('collapsed');
-                });
-                
-                // 默认展开第一个年份
-                if (title.textContent.includes('<script>document.write(new Date().getFullYear())</script>')) {
+            // 自动处理：当年和明年折叠，其他展开
+            const yearMatch = title.textContent.match(/\d{4}/);
+            if (yearMatch) {
+                const itemYear = parseInt(yearMatch[0]);
+                if (itemYear >= currentYear) {
                     title.classList.add('collapsed');
                     title.nextElementSibling.classList.add('collapsed');
                 }
-            });
-            
-            // 点赞功能
-            const likeBtn = document.getElementById('like-btn');
-            if (likeBtn) {
-                likeBtn.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                });
             }
         });
-    </script>
+        
+        // 点赞功能
+        const likeBtn = document.getElementById('like-btn');
+        if (likeBtn) {
+            likeBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
 
