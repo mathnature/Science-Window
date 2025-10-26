@@ -246,104 +246,121 @@
             border-bottom: 1px dashed #e8e1d5;
         }
         
-        /* 诗歌排版样式 */
+        /* 新的诗歌排版方案 - 使用表格布局 */
         .poem-container {
-            margin: 32px 0;
-            padding: 25px;
+            margin: 2rem 0;
+            padding: 2rem;
             background: #fcfaf7;
             border-left: 3px solid #e8d9c5;
-            border-radius: 4px;
+            border-radius: 8px;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+            width: auto;
+        }
+        
+        .poem-inner-container {
+            display: table-cell;
+            text-align: center;
+            vertical-align: top;
         }
         
         .poem-title {
-            text-align: center;
-            font-size: 28px;
+            font-size: 1.8rem;
             color: #7a5c3c;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
             font-weight: 600;
+            text-align: center;
         }
         
         .poem-author {
-            text-align: center;
-            font-size: 16px;
+            font-size: 1rem;
             color: #9e8e7a;
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-
+        
         .poem-date {
-            text-align: center;
-            font-size: 12px;
+            font-size: 0.8rem;
             color: #9e8e7a;
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
         
         .poem-content {
-            width: 100%;
-            font-size: 16px;
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
         }
         
         .poem-stanza {
-            margin-bottom: 25px; /* 减少诗节间距 */
-            text-align: center;
+            margin-bottom: 1.5rem;
         }
         
         .poem-line {
-            text-align: center;
-            font-size: 18px;
-            line-height: 1.6; /* 恢复紧凑行距 */
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: #5a4a3a;
-            margin: 2px 0; /* 减少行间距 */
+            margin: 0.2rem 0;
+            white-space: nowrap;
+            text-align: left;
         }
         
-        .article-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e8e1d5;
-            justify-content: center;
-        }
-        
-        .btn {
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .btn-like {
-            background: #f0ebe4;
-            color: #8c7b6c;
-        }
-        
-        .btn-like:hover, .btn-like.active {
-            background: #e8c4c4;
-            color: #b85c5c;
-        }
-        
-        .btn-comment {
-            background: #f0ebe4;
-            color: #8c7b6c;
-        }
-        
-        .btn-comment:hover {
-            background: #d4e0d4;
-            color: #5a7d5a;
+        .poem-explanation {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #e8e1d5;
+            font-size: 0.95rem;
+            text-align: justify;
+            line-height: 1.6;
+            color: #666;
+            width: 100%;
         }
         
         /* 响应式设计 */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .container {
                 flex-direction: column;
-                padding: 15px;
             }
             
             .sidebar {
                 flex: none;
                 width: 100%;
                 position: static;
+            }
+            
+            .poem-line {
+                white-space: normal;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .main-content, .sidebar {
+                padding: 1.5rem;
+            }
+            
+            .poem-container {
+                padding: 1.5rem;
+                width: 100%;
+                display: block;
+            }
+            
+            .poem-inner-container {
+                display: block;
+            }
+            
+            .poem-content {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .poem-line {
+                white-space: normal;
+                text-align: center;
             }
         }
 
@@ -436,68 +453,127 @@ a:hover {
             </div>
         </aside>
         
-        <!-- 主内容区 -->
-        <main class="main-content">
-            <div id="content-area">
+<!-- 主内容区开始 -->
+	<main class="main-content">
+	<div id="content-area">
+	<header class="article-header">
+	<h2 class="article-title">《科学视窗》</h2>
+	<div class="article-meta">
+	<!--      <span>诗歌</span>  -->
+	</div>
+	</header>
+       
+	<!-- 新的诗歌布局 -->
+	<div class="poem-container">
+                <div class="poem-inner-container">
 
-                    <header class="article-header">
-                        <h2 class="article-title">《科学视窗》</h2>
-                        <div class="article-meta">
-                      <!--      <span>诗歌</span>  -->
-                        </div>
-                    </header>
+<!-- 替换1标题开始 -->
+	<div class="poem-title">黑洞的传说</div>
+<!-- 替换1标题结束 -->                    
 
-                <!-- 移除重复的标题，直接在诗歌容器中显示 -->
-                <article class="article-content">
-                    <div class="poem-container">
-                        <div class="poem-title">中秋夜</div>
+	<div class="poem-author">
+	东方学帝◊X. D. Dongfang
+	<br>
 
-<div class="poem-author">
-    东方学帝◊X. D. Dongfang
-<br>
-    <span class="poem-date">2020年6月14日</span>
-</div>
+<!-- 替换2日期开始 -->
+	<span class="poem-date">2020年7月10日</span>
+<!-- 替换2日期结束 -->
 
-<style>
-.poem-author {
-    text-align: center;
-    font-size: 14px;
-    color: #9e8e7a;
-    margin-bottom: 25px;
-    line-height: 1.4;
-}
-.poem-date {
-    font-size: 11px;
-    opacity: 0.8;
-}
-</style>
-                        
-                        <div class="poem-content">
-                            <div class="poem-stanza">
-                                <div class="poem-line">中秋静夜风正凉，</div>
-                                <div class="poem-line">绿草高楼画灯光。</div>
-                                <div class="poem-line">飞絮流云掩孤月，</div>
-                                <div class="poem-line">游子暗泪洗心伤。</div>
-                                <div class="poem-line">万卷香书无声息，</div>
-                                <div class="poem-line">半兜铝币响叮当。</div>
-                                <div class="poem-line">群鸦西山噪黑洞，</div>
-                                <div class="poem-line">伊人明眸向东方。</div>
-                            </div>
+	</div>
+                    
+	<!-- 关键：使用inline-block让诗歌内容在居中容器内左对齐 -->
+	<div class="poem-content">
+<!-- 替换3文章开始 -->
+                        <div class="poem-stanza">
+                            <div class="poem-line">荒诞理论成就大名人，</div>
+                            <div class="poem-line">出名的人说话很响亮。</div>
+                            <div class="poem-line">浑浑然几多基本假设，</div>
+                            <div class="poem-line">昭昭然几多玄妙臆想。</div>
+                            <div class="poem-line">说不清时间空间的意义，</div>
+                            <div class="poem-line">歪曲光速篡改科学逻辑，</div>
+                            <div class="poem-line">琢磨不透光电磁的实质，</div>
+                            <div class="poem-line">妄断电磁光传播着质量。</div>
+                            <div class="poem-line">星光被太阳的大气折射，</div>
+                            <div class="poem-line">用时间空间弯曲来戏说。</div>
+                            <div class="poem-line">是非曲直全凭三人想象，</div>
+                            <div class="poem-line">普天下摇头晃脑尽颂扬。</div>
                         </div>
 
+                        <div class="poem-stanza">
+                            <div class="poem-line">荒唐臆想写进了引力场，</div>
+                            <div class="poem-line">一个方程，千百个参量，</div>
+                            <div class="poem-line">众星捧月，一百年疯狂，</div>
+                            <div class="poem-line">竟不知方程的解在何方。</div>
+                            <div class="poem-line">悖论纷纭，求观测效应，</div>
+                            <div class="poem-line">戏言思维实验逻辑相当。</div>
+                            <div class="poem-line">狂人死盯方程苦思冥想：</div>
+                            <div class="poem-line">宇宙应长成方程的娇样。</div>
+                            <div class="poem-line">无知于数学方程的奇点，</div>
+                            <div class="poem-line">茫然于经典理论的榜样，</div>
+                            <div class="poem-line">异想天开猎名黑洞视界，</div>
+                            <div class="poem-line">歪曲传播无限远处的光。</div>
+                        </div>
 
-<p style="text-align: justify; font-size: 15px;">
-——顾此失彼的构想，被画上高等数学方程的光环和赋予复杂的解说和演绎，创造着一个个激动人心实则虚幻的宇宙，这是现代物理的真实写照。黑洞概念本质是数学形式体系对物理现实的僭越，爱因斯坦方程特殊的史瓦西解，被阐释为真空场方程的奇点解，进而创造了黑洞，这种想象性的物理解读已异化为现代版的地心说。人为预设条件下的数学推导取代了实验验证，成为主流理论正当性的唯一标准；当学术权威的背书比自然现象的反证更受推崇时，物理学已背离其探索物质世界本质的初心。螺旋双黑洞的融合构想陷入必须依赖的混沌宇宙背景恰恰会被其自身的强大引力所摧毁的逻辑悖论。本不存在的双星融合现象被宣告捕捉到了它们生命最后时候的悲壮数据，暴露的正是理论为维持自身存续而扭曲事实的生存策略。
-</p>
+                        <div class="poem-stanza">
+                            <div class="poem-line">天文望远镜里时空有限，</div>
+                            <div class="poem-line">没有恒星的空间不发光，</div>
+                            <div class="poem-line">数不尽满天璀璨的繁星，</div>
+                            <div class="poem-line">找不到融合的数十太阳。</div>
+                            <div class="poem-line">生诡计黑洞囚禁着光明，</div>
+                            <div class="poem-line">想当然远古双黑洞合并，</div>
+                            <div class="poem-line">杜撰数据描绘时空涟漪，</div>
+                            <div class="poem-line">有模有样书画引力波形。</div>
+                            <div class="poem-line">计算错误宣称学术突破，</div>
+                            <div class="poem-line">子虚乌有高论远古天景。</div>
+                            <div class="poem-line">近代物理俨然邪教化身，</div>
+                            <div class="poem-line">扭曲数学维护教父英名。</div>
+                        </div>
 
-                    </div>
-                </article>
-                
+                        <div class="poem-stanza">
+                            <div class="poem-line">纵使黑洞合并撼苍穹，</div>
+                            <div class="poem-line">引力波真假定然分明。</div>
+                            <div class="poem-line">质疑者被封杀无处发声，</div>
+                            <div class="poem-line">时空弯曲于是被迫见证。</div>
+                            <div class="poem-line">引力质量惯性质量不等，</div>
+                            <div class="poem-line">实验设计错误无法验证。</div>
+                            <div class="poem-line">诡辩歪理邪说定制标准，</div>
+                            <div class="poem-line">弄虚作假润色八股论文。</div>
+                            <div class="poem-line">近代物理学家心计很深，</div>
+                            <div class="poem-line">舞文弄墨灭尽天下油灯，</div>
+                            <div class="poem-line">自信天衣无缝终成定论，</div>
+                            <div class="poem-line">被揭穿扼杀真理心怀恨。</div>
+                        </div>
+
+                        <div class="poem-stanza">
+                            <div class="poem-line">宇宙中本无黑洞衍生，</div>
+                            <div class="poem-line">螺旋引力波不可当真。</div>
+                            <div class="poem-line">双星合并愚弄欺骗世人，</div>
+                            <div class="poem-line">读近代物理得处处留心。</div>
+                            <div class="poem-line">冠冕学术堂皇追利逐名，</div>
+                            <div class="poem-line">真理谬论只靠主观认定。</div>
+                            <div class="poem-line">权威黑白颠倒混淆是听，</div>
+                            <div class="poem-line">粉丝麻木不仁随俗浮沉。</div>
+                            <div class="poem-line">我叹人生短暂多疑问，</div>
+                            <div class="poem-line">贫富贵贱终归虚化命。</div>
+                            <div class="poem-line">借问苍天何日还公正，</div>
+                            <div class="poem-line">真理云开日出见光明？</div>
+                        </div>
+<!-- 替换3文章结束 -->
+	</div>
+                    
+	<div class="poem-explanation">
+	<p style="text-align: justify; font-size: 14px;">
+<!-- 替换4题注开始 -->
+——由引力方程的奇点突发异想而生的黑洞是一个缺乏真实背景的虚幻概念。LIGO实际上希望捕捉到频率单调增加的高频信号，从而渲染十余亿光年外双黑洞合并的引力，完成了爱因斯坦广义相对论的最后一块拼图，挟此镇服物理天下。然而，在LIGO的所有信号波中，只有GW150914信号波数据精确，其波形与双星合并引力波在定性意义上相似，实际上是不满足广义相对论的频率方程的。而LIGO论文缺少起码的必要科学计算，却被作为科学突破性成就引起了世界的轰动，这应该归功于运作新闻媒体进行狂轰滥炸式的炒作。目前尚无任何科学方法能够证明GW150914信号波就是所谓双星合并的引力波，而地球上有很多频率分布变化规律与之相似的信号，并且实验室也能够模拟出同样频率分布的信号。那么，宇宙中真有黑洞吗？LIGO团队及其联盟穷尽其隐天蔽日的力量扼杀所有关于GW50914信号波的精确分析的结果，让所谓双黑洞合并引力波的浮华之光在物理的长夜里闪耀得更持久一些。然而，总有一天，LIGO信号波的真相一定大白于天下。特赋诗一首，记载这一段令追求真理的物理人愤怒而无奈的屈辱物理学历史。
+<!-- 替换4题注结束 -->
+	</p>
+	</div> 
+
 	<br>
 
 <!-- 替换5导航开始 -->
 <div class="poem-navigation" style="display: flex; justify-content: space-between; margin-top: 2rem;">
-    <a href="SW202101.html" style="color: #7a5c3c; text-decoration: none;">← 上一篇</a>
+    <a href="SW202103.html" style="color: #7a5c3c; text-decoration: none;">← 上一篇</a>
 <a href="index.html" 
    style="color: #7a5c3c; text-decoration: none; transition: all 0.3s ease;"
    onmouseover="this.style.color='#ff6600'; this.style.transform='translateY(-1px)'"
@@ -506,16 +582,17 @@ a:hover {
 <span style="display: inline-block; width: 0.5em;"></span>
 🏠返回首页
 </a>
-    <a href="SW202103.html" style="color: #7a5c3c; text-decoration: none;">下一篇 →</a>
+    <a href="SW202105.html" style="color: #7a5c3c; text-decoration: none;">下一篇 →</a>
 </div>
 <!-- 替换5导航结束 -->
 
 	<br>    
-            </div>
+
 	<p style="font-size: 12px; text-align: center;">《科学视窗》编委会 © 2021-<script>document.write(new Date().getFullYear())</script> All Rights Reserved</p>
-	<br>
-        </main>
-    </div>
+	</div>
+	</main> 
+<!-- 主内容区结束 -->
+	</div>
 
     <script>
         // 年卷目录折叠功能
