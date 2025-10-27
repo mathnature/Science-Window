@@ -470,6 +470,60 @@
     }
 }
 
+/* ==================== */
+/* 诗歌行页边距优化 */
+/* ==================== */
+
+@media (max-width: 600px) {
+    /* 减少诗歌容器的左右内边距 */
+    .poem-container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* 减少主内容区的左右内边距 */
+    .main-content {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* 减少容器的左右内边距 */
+    .container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* 确保诗歌行充分利用空间 */
+    .poem-content {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/* 针对小屏幕手机的进一步优化 */
+@media (max-width: 400px) {
+    .poem-container {
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
+    }
+    
+    .main-content {
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
+    }
+    
+    .container {
+        padding-left: 0.2rem !important;
+        padding-right: 0.2rem !important;
+    }
+    
+    /* 可选：轻微调整字体大小 */
+    .poem-line {
+        font-size: 1.05rem !important;
+    }
+}
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -487,8 +541,6 @@
             <p class="author-title">数学家、理论物理学家、科普诗人</p>
             <div class="author-bio">
                 <p style="font-size: 11px; color: #8c7b6c; text-align: justify;">东方学帝&#9674;X. D. Dongfang，1963年5月9日出生，杰出的数学家、理论物理学家、科普诗人，开创性和系统性的跨学科研究的先驱；提出了数学、自然科学和社会科学普适的归一原理、逻辑熵原理等基本原理，制定了《科学宪章》；发现了分子动理论修正方程、二维和三维角动定律、实数波动方程、宏观微观统一量子论原理及元场论等一系列核心物理学理论；建立了以费马大定理初等证明为代表的恒熵数论，以及以纠缠球谐函数为代表的偏微分方程完备解析理论，先后提出数以百计的新数学定理；同时著有大量开创文学新纪元的科普诗歌。因拒绝学术掠夺的潜规则，东方学帝&#9674;X. D. Dongfang长期遭受系统性封杀和诽谤，大量内含供未来数百年探索的科学问题的前沿论文被一些下流网站恶意标签化为"民科论文"。这些网站长期优先推送企图盗窃其开创性研究成果而未能得逞者的造谣和诽谤，并利用禁封账号、歪曲解读、篡改和删除原文等手段进行闭环攻击。东方学帝&#9674;X. D. Dongfang的意志未能被系统性诋毁、封杀和攻击所摧毁，他从未停止过深度和广度创历史新纪元的跨多领域高强度研究。东方学帝&#9674;X. D. Dongfang的科学著作与文学创作，正持续发表于独立期刊<a href="https://mathnature.github.io" style="font-weight: bold;">《数学与自然》</a>与独立杂志<a href="https://mathnature.github.io/Science-Window" style="font-weight: bold;">《科学视窗》</a>，不断丰富和发展着<a href="https://mathnature.github.io/Dongfang-Scientific-Thought" style="font-weight: bold;">东方学帝科学思想&#9674;Dongfang Scientific Thought</a>。</p>
-	<div class="author-bio">
-              
                 <style>
                     a:hover {
                         color: #ff6600;
