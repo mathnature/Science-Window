@@ -3,596 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>科学视窗</title>
-    <meta name="description" content="东方学帝科学思想：涵盖归一原理、逻辑熵原理、科学宪章、相对光速、分子动理论修正方程、角动定律、纠缠球谐函数、实数波动方程、共量子论及费马大定理的证明。">
+    <title>科学视窗 · 五千年《量子泪》流向《楠竹宫殿》</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        /* 基础样式 */
+        body, html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Noto Serif SC', 'STKaiti', serif;
-        }
-        
-        body {
-            background-color: #f8f5f0;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            gap: 30px;
-            min-height: 100vh;
-        }
-        
-        /* 侧边栏样式 */
-        .sidebar {
-            flex: 0 0 300px;
-            background: #fff;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            height: fit-content;
-            position: sticky;
-            top: 20px;
-        }
-        
-        .author-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
+            height: 100%;
             overflow: hidden;
-            border: 3px solid #e8e1d5;
+            font-family: 'Noto Serif SC', serif;
+            color: #f8f9fa;
+            background: linear-gradient(to bottom, #000000 0%, #1a1a2e 30%, #2c3e50 100%);
         }
-        
-        .author-avatar img {
+
+        /* 黎明背景容器 */
+        #dawn-scene {
+            position: absolute;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-        }
-        
-        .author-name {
-            text-align: center;
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #5a3921;
-        }
-        
-        .author-title {
-            text-align: center;
-            color: #8c7b6c;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        
-        .author-bio {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 25px;
-            text-align: justify;
-            line-height: 1.6;
-        }
-        
-        .author-bio a {
-            color: #7a5c3c;
-            text-decoration: none;
-        }
-        
-        .author-bio a:hover {
-            text-decoration: underline;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .social-link {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #f0ebe4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8c7b6c;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .social-link:hover {
-            background: #e0d6c8;
-            color: #5a3921;
-        }
-        
-        /* 年卷目录样式 - 下拉式 */
-        .year-volumes {
-            border-top: 1px solid #e8e1d5;
-            padding-top: 20px;
-        }
-        
-        .scroll-container {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-        
-        .scroll-container::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .scroll-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: #c1b7a9;
-            border-radius: 10px;
-        }
-        
-        .scroll-container::-webkit-scrollbar-thumb:hover {
-            background: #a89f93;
-        }
-        
-        .year-item {
-            margin-bottom: 20px;
-        }
-        
-        .year-title {
-            font-size: 18px;
-            color: #5a3921;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed #e8e1d5;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .year-title::after {
-            content: "▼";
-            font-size: 12px;
-            transition: transform 0.3s;
-        }
-        
-        .year-title.collapsed::after {
-            transform: rotate(-90deg);
-        }
-        
-        .year-item ul {
-            list-style: none;
-            margin-left: 10px;
-            transition: all 0.3s;
+            z-index: -1;
             overflow: hidden;
         }
-        
-        .year-item ul.collapsed {
-            max-height: 0;
-            opacity: 0;
-        }
-        
-        .year-item ul:not(.collapsed) {
-            max-height: 1000px;
-            opacity: 1;
-        }
-        
-        .year-item li {
-            margin-bottom: 8px;
-        }
-        
-        .year-item a {
-            display: block;
-            padding: 8px 12px;
-            background: #fcfaf7;
-            border-radius: 4px;
-            border-left: 3px solid #e8d9c5;
-            text-decoration: none;
-            color: #7a5c3c;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .year-item a:hover {
-            background: #f5f0e8;
-            transform: translateX(5px);
-        }
-        
-        /* 主内容区样式 */
-        .main-content {
-            flex: 1;
-            background: #fff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .article-header {
-            border-bottom: 1px solid #e8e1d5;
-            padding-bottom: 20px;
-            margin-bottom: 25px;
-        }
-        
-        .article-meta {
-            display: flex;
-            color: #8c7b6c;
-            font-size: 14px;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .article-content {
-            font-size: 17px;
-            line-height: 1.6; /* 恢复紧凑行距 */
-            color: #444;
-        }
-        
-        .article-content p {
-            margin-bottom: 20px;
-            text-indent: 2em;
-        }
-        
-        .article-content h2 {
-            color: #5a3921;
-            margin: 30px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed #e8e1d5;
-        }
-        
-        /* 诗歌排版样式 */
-        .poem-container {
-            margin: 32px 0;
-            padding: 25px;
-            background: #fcfaf7;
-            border-left: 3px solid #e8d9c5;
-            border-radius: 4px;
-        }
-        
-        .poem-title {
-            text-align: center;
-            font-size: 28px;
-            color: #7a5c3c;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .poem-author {
-            text-align: center;
-            font-size: 16px;
-            color: #9e8e7a;
-            margin-bottom: 25px;
-        }
 
-        .poem-date {
-            text-align: center;
-            font-size: 12px;
-            color: #9e8e7a;
-            margin-bottom: 25px;
-        }
-        
-        .poem-content {
+        /* 地平线 */
+        .horizon {
+            position: absolute;
+            bottom: 0;
             width: 100%;
-            font-size: 16px;
+            height: 40%;
+            background: linear-gradient(to top, 
+                rgba(44, 62, 80, 0.8) 0%,
+                rgba(26, 26, 46, 0.6) 30%,
+                transparent 100%);
         }
-        
-        .poem-stanza {
-            margin-bottom: 25px; /* 减少诗节间距 */
-            text-align: center;
+
+        /* 太阳/晨曦 */
+        .sun {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, 
+                #ff6b35 0%,
+                #ff8e53 20%,
+                #feca57 40%,
+                rgba(254, 202, 87, 0.3) 70%,
+                transparent 100%);
+            border-radius: 50%;
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(10px);
+            opacity: 0;
+            animation: sunrise 5s ease-out 2s forwards;
         }
-        
-        .poem-line {
-            text-align: center;
-            font-size: 18px;
-            line-height: 1.6; /* 恢复紧凑行距 */
-            color: #5a4a3a;
-            margin: 2px 0; /* 减少行间距 */
+
+        /* 阳光辐射 */
+        .sun-rays {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, 
+                transparent 30%,
+                rgba(255, 107, 53, 0.1) 40%,
+                rgba(255, 142, 83, 0.05) 60%,
+                transparent 70%);
+            border-radius: 50%;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: rays-spread 6s ease-out 2s forwards;
         }
-        
-        .article-actions {
+
+        /* 星空淡出 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            animation: stars-fade 5s ease-out 2s forwards;
+        }
+
+        /* 主容器 */
+        .container {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e8e1d5;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+            opacity: 0;
+            animation: content-appear 5s ease-out 2s forwards;
         }
-        
-        .btn {
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
+
+        /* 标题样式 */
+        .site-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            color: transparent;
+            background: linear-gradient(45deg, 
+                #e8e6e3 0%,
+                #ff6b35 30%,
+                #feca57 70%,
+                #ff8e53 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+            letter-spacing: 8px;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: title-rise 2s ease-out 2.5s forwards;
         }
-        
-        .btn-like {
-            background: #f0ebe4;
-            color: #8c7b6c;
+
+        /* 核心诗句 - 灰白色带微红 */
+        .poem {
+            font-size: 2rem;
+            line-height: 1.8;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            color: #f0e6e0; /* 灰白色带微红 */
+            text-shadow: 0 2px 15px rgba(255, 107, 53, 0.4);
         }
-        
-        .btn-like:hover, .btn-like.active {
-            background: #e8c4c4;
-            color: #b85c5c;
+
+        .poem p {
+            margin: 1.5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
         }
-        
-        .btn-comment {
-            background: #f0ebe4;
-            color: #8c7b6c;
+
+        .poem p:nth-child(1) { animation: line-rise 1.5s ease-out 3s forwards; }
+        .poem p:nth-child(2) { animation: line-rise 1.5s ease-out 3.3s forwards; }
+        .poem p:nth-child(3) { animation: line-rise 1.5s ease-out 3.6s forwards; }
+        .poem p:nth-child(4) { animation: line-rise 1.5s ease-out 3.9s forwards; }
+
+        /* 导航链接 - 高对比度 */
+        .nav-links {
+            display: flex;
+            gap: 4rem;
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: nav-appear 1.5s ease-out 3.0s forwards;
         }
-        
-        .btn-comment:hover {
-            background: #d4e0d4;
-            color: #5a7d5a;
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border: 2px solid #ff6b35;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 107, 53, 0.2);
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
         }
-        
-        /* 响应式设计 */
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            background: rgba(255, 107, 53, 0.4);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        /* 动画定义 - 缩短时间 */
+        @keyframes sunrise {
+            0% { 
+                opacity: 0;
+                transform: translateX(-50%) translateY(100px) scale(0.5);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+        @keyframes rays-spread {
+            0% { 
+                opacity: 0;
+                transform: translateX(-50%) scale(0.5);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateX(-50%) scale(1.5);
+            }
+        }
+
+        @keyframes stars-fade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes content-appear {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes title-rise {
+            0% { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes line-rise {
+            0% { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes nav-appear {
+            0% { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式调整 */
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                padding: 15px;
-            }
-            
-            .sidebar {
-                flex: none;
-                width: 100%;
-                position: static;
-            }
+            .site-title { font-size: 2.5rem; letter-spacing: 4px; }
+            .poem { font-size: 1.5rem; margin-bottom: 3rem; }
+            .nav-links { gap: 2rem; flex-direction: column; }
+            .nav-links a { padding: 10px 24px; }
+            .sun { width: 150px; height: 150px; }
+            .sun-rays { width: 300px; height: 300px; }
         }
-
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
+    <!-- 黎明场景 -->
+    <div id="dawn-scene">
+        <div class="stars" id="stars-container"></div>
+        <div class="sun"></div>
+        <div class="sun-rays"></div>
+        <div class="horizon"></div>
+    </div>
+    
+    <!-- 主内容区 -->
     <div class="container">
-        <!-- 侧边栏 -->
-        <aside class="sidebar">
-            <div class="author-avatar">
-                <img src="https://mathnature.github.io/page_files/image001.jpg" alt="超函数">
-            </div>
-            <h4 class="author-name">东方学帝◊X. D. Dongfang</h4>
-            <p style="font-size: 11px; color: #8c7b6c; text-align: center;">（注：◊表示姓名的两种语言形式镜像对应）</p>
-            <p class="author-title">数学家、理论物理学家、科普诗人</p>
-            <div class="author-bio">
-<p style="font-size: 11px; color: #8c7b6c; text-align: justify;">东方学帝◊X. D. Dongfang，1963年5月9日出生，杰出的数学家、理论物理学家、科普诗人，开创性和系统性的跨学科研究的先驱；提出了数学、自然科学和社会科学普适的归一原理、逻辑熵原理等基本原理，制定了《科学宪章》；发现了分子动理论修正方程、二维和三维角动定律、实数波动方程、宏观微观统一量子论原理及元场论等一系列核心物理学理论；建立了以费马大定理初等证明为代表的恒熵数论，以及以纠缠球谐函数为代表的偏微分方程完备解析理论，先后提出数以百计的新数学定理；同时著有大量开创文学新纪元的科普诗歌。因拒绝学术掠夺的潜规则，东方学帝◊X. D. Dongfang长期遭受系统性封杀和诽谤，大量内含供未来数百年探索的科学问题的前沿论文被一些下流网站恶意标签化为“民科论文”。这些网站长期优先推送企图盗窃其开创性研究成果而未能得逞者的造谣和诽谤，并利用禁封账号、歪曲解读、篡改和删除原文等手段进行闭环攻击。东方学帝◊X. D. Dongfang的意志未能被系统性诋毁、封杀和攻击所摧毁，他从未停止过深度和广度创历史新纪元的跨多领域高强度研究。东方学帝◊X. D. Dongfang的科学著作与文学创作，正持续发表于独立期刊<a href="https://mathnature.github.io" style="font-weight: bold;"">《数学与自然》</a>与独立杂志<a href="https://mathnature.github.io/Science-Window" style="font-weight: bold;"">《科学视窗》</a>，不断丰富和发展着<a href="https://mathnature.github.io/Dongfang-Scientific-Thought" style="font-weight: bold;"">东方学帝科学思想◊Dongfang Scientific Thought</a>。</p>
-<style>
-a:hover {
-    color: #ff6600;
-    text-decoration: underline;
-}
-</style>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
-            </div>
-            
-            <!-- 年卷目录 -->
-            <div class="year-volumes">
-                <div class="scroll-container">
-                    <div class="year-item">
-                        <h3 class="year-title">2025年卷</h3>
-                        <ul>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202501.html" target="_blank">叙事诗：楠竹宫殿第一章百灵和白鹭</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="year-item">
-                        <h3 class="year-title">2024年卷</h3>
-                        <ul>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202401.html" target="_blank">散文诗：浮云幽灵</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202402.html" target="_blank">报告文学：共量子论的曲折历程</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202403.html" target="_blank">科学宣言：东方科学的历史使命</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="year-item">
-                        <h3 class="year-title">2023年卷</h3>
-                        <ul>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202301.html" target="_blank">短篇小说：晨安</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202302.html" target="_blank">短篇小说：秋韵</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202303.html" target="_blank">短篇小说：课堂</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="year-item">
-                        <h3 class="year-title">2022年卷</h3>
-                        <ul>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202201.html" target="_blank">科普诗：大别山少年</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202202.html" target="_blank">科普诗：混沌量子引力</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202203.html" target="_blank">科普诗：弯曲的心</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202204.html" target="_blank">科普诗：电子的控诉</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202205.html" target="_blank">抒情诗：今日学术咏叹</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202206.html" target="_blank">科普诗：孙子定理古与今</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202207.html" target="_blank">科普诗：忘掉物理的浮华</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202208.html" target="_blank">抒情诗：东方物理的悲怆</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202210.html" target="_blank">抒情诗：梧桐山的鹰</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="year-item">
-                        <h3 class="year-title">2021年卷</h3>
-                        <ul>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202101.html" target="_blank">科普散文：共量子论宣言</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202102.html" target="_blank">科普诗：中秋夜</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202103.html" target="_blank">科普诗：量子泪</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202104.html" target="_blank">科普诗：黑洞的传说</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202105.html" target="_blank">科普诗：梦幻引力波</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202106.html" target="_blank">田园诗：雨润花</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202107.html" target="_blank">抒情诗：花凋零</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202108.html" target="_blank">科普诗：天道</a></li>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202109.html" target="_blank">抒情诗：青春</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </aside>
+        <!-- 网站标题 -->
+        <h1 class="site-title">《科学视窗》</h1>
         
-        <!-- 主内容区 -->
-        <main class="main-content">
-            <div id="content-area">
-
-                    <header class="article-header">
-                        <h2 class="article-title">《科学视窗》❤️心之语</h2>
-                        <div class="article-meta">
-                      <!--      <span>诗歌</span>  -->
-                        </div>
-                    </header>
-
-                <!-- 移除重复的标题，直接在诗歌容器中显示 -->
-                <article class="article-content">
-                    <div class="poem-container">
-
-                        <div class="poem-title">量子泪</div>
-
-<div class="poem-author">
-    东方学帝◊X. D. Dongfang
-<br>
-    <span class="poem-date">2020年6月14日</span>
-</div>
-
-<style>
-.poem-author {
-    text-align: center;
-    font-size: 14px;
-    color: #9e8e7a;
-    margin-bottom: 25px;
-    line-height: 1.4;
-}
-.poem-date {
-    font-size: 11px;
-    opacity: 0.8;
-}
-</style>
-                        
-                        <div class="poem-content">
-                            <div class="poem-stanza">
-                                <div class="poem-line">哭吧，稻田里美丽的少女，</div>
-                                <div class="poem-line">一滴滴泪水，一粒粒珍珠。</div>
-                                <div class="poem-line">悠悠十年书香墨韵化烟云，</div>
-                                <div class="poem-line">量子泪，原来是你的杰作。</div>
-                                <div class="poem-line">雪花儿飞舞，沙儿被埋没，</div>
-                                <div class="poem-line">玩物理的人不问耕作劳苦。</div>
-                                <div class="poem-line">今儿一假说，明儿一推论，</div>
-                                <div class="poem-line">算出上帝粒子算不出稻谷。</div>
-                            </div>
-
-                            <div class="poem-stanza">
-                                <div class="poem-line">天上有行星，地上有谐振，</div>
-                                <div class="poem-line">电磁振荡谱，美称电磁波。</div>
-                                <div class="poem-line">往复一周期，量子来对应，</div>
-                                <div class="poem-line">算一算普朗克假说未必真。</div>
-                                <div class="poem-line">华丽聚光灯，照亮精英们，</div>
-                                <div class="poem-line">天降异人一蹴而就光子论。</div>
-                                <div class="poem-line">光子是何物，纠缠能通信？</div>
-                                <div class="poem-line">动辄便突破，因果说不清。</div>
-                            </div>
-
-                            <div class="poem-stanza">
-                                <div class="poem-line">玻尔模型演绎氢原子光谱，</div>
-                                <div class="poem-line">一条条假设，一道道魔术；</div>
-                                <div class="poem-line">薛定谔方程匹配相同结果，</div>
-                                <div class="poem-line">天作巧合，物理充满迷雾；</div>
-                                <div class="poem-line">测不出谁的角动量值可信，</div>
-                                <div class="poem-line">量子论融合了狭义相对论；</div>
-                                <div class="poem-line">不得检验伪解狄拉克方程，</div>
-                                <div class="poem-line">恍恍惚惚衍生了量子场论。</div>
-                            </div>
-
-                            <div class="poem-stanza">
-                                <div class="poem-line">麦克斯韦说光就是电磁波，</div>
-                                <div class="poem-line">发射和接收，天线来通信。</div>
-                                <div class="poem-line">天线不导光，莫须寻原因，</div>
-                                <div class="poem-line">无人再探索，唯有问利名。</div>
-                                <div class="poem-line">世事最怪莫过理论物理学，</div>
-                                <div class="poem-line">粉饰虚无，捣鼓微分方程。</div>
-                                <div class="poem-line">存伪去真，众生谈笑纷纭，</div>
-                                <div class="poem-line">灯红酒绿终淹没自然色景。</div>
-                            </div>
-
-                            <div class="poem-stanza">
-                                <div class="poem-line">哭吧，稻田里美丽的少女，</div>
-                                <div class="poem-line">一滴滴汗水，一串串谷穗。</div>
-                                <div class="poem-line">各国有明文，规则写得清，</div>
-                                <div class="poem-line">量子多疑问，回乡务农耕。</div>
-                                <div class="poem-line">冬日伴风泣，夏日听雷鸣，</div>
-                                <div class="poem-line">从此不闻少男少女读书声。</div>
-                                <div class="poem-line">商人煮稀粥，冠名量子股，</div>
-                                <div class="poem-line">买股兆丰收，长流量子泪。</div>
-                            </div>
-                        </div>
-
-<p style="text-align: justify; font-size: 15px;">
-——自从麦克斯韦方程组平面波模的通解和特解被混淆那时起，理论物理就开始犯各种各样的概念错误和计算错误，发展到近代物理，大量的虚假概念、不成立的假设、空洞的哲学思辨和虚假的数学计算充斥物理学，数不胜数。单说似乎奥妙无穷的量子力学，它起源于普朗克假设，形式上取得了一定的成功。然而，普朗克假设实际上并非普遍成立，所谓普朗克常数只不过是近似意义的常数。量子力学所构造的薛定谔方程也并不是一个精确的波动方程，而狄拉克波动方程的形式精确解在坐标原点是发散的，与波动方程的边界条件水火不容，满足边界条件的真实精确解却不能给出符合氢原子光谱精细结构的期望能级公式。无知于量子力学本质的人们联合了起来，通过举行某个会议自命权威学术团体，从而向全世界宣扬，他们用所谓的普朗克常数重新赋予了质量的定义。这，只是一场因果混淆、本末倒置、逆行倒施的拙劣表演。共量子论完美演绎自然科学逻辑，量子力学的神秘面纱将被彻底撕开，量子力学的本质不再成为困扰物理读者的难题，量子力学中大量的数学计算错误得到修正，宏观和微观量子理论获得统一，理论物理狭窄幽暗的小道从此云开雾散豁然开朗。今天，共量子论被只贪图名利的学术霸凌所封杀。那么，一百年之后呢？一百年后，共量子论定将大放光彩。兹赋诗一首，献给未来道德高尚的物理人们。
-</p>
-                    </div>
-                </article>
-                
-	<br>
-
-<!-- 替换5导航开始 -->
-<div class="poem-navigation" style="display: flex; justify-content: space-between; margin-top: 2rem;">
-    <a href="index.html" style="color: #7a5c3c; text-decoration: none;">← 上一篇</a>
-<a href="index.html" 
-   style="color: #7a5c3c; text-decoration: none; transition: all 0.3s ease;"
-   onmouseover="this.style.color='#ff6600'; this.style.transform='translateY(-1px)'"
-   onmouseout="this.style.color='#7a5c3c'; this.style.transform='translateY(0)'">
-<p>🏠返回首页</p>
-</a>
-    <a href="SW202102.html" style="color: #7a5c3c; text-decoration: none;">下一篇 →</a>
-</div>
-<!-- 替换5导航结束 -->
-
-	<br>    
-            </div>
-	<p style="font-size: 12px; text-align: center;">《科学视窗》编委会 © 2021-<script>document.write(new Date().getFullYear())</script> All Rights Reserved</p>
-	<br>
-        </main>
+        <!-- 核心诗句 -->
+        <div class="poem">
+            <p>欢迎，天才的您！</p>
+            <p>请携走所有光芒，</p>
+            <p>去沐染世间万物，</p>
+            <p>这便是您伟大的释义！</p>
+        </div>
+        
+        <!-- 极简导航 -->
+        <nav class="nav-links">
+            <a href="SW202103.html">五千年《量子泪》</a>
+            <a href="#last">流向《楠竹宫殿》</a>
+        </nav>
     </div>
 
-<script>
-// 年卷目录折叠功能
-    document.addEventListener('DOMContentLoaded', function() {
-        const yearTitles = document.querySelectorAll('.year-title');
-        const currentYear = new Date().getFullYear();
-        
-        yearTitles.forEach(title => {
-            title.addEventListener('click', function() {
-                const list = this.nextElementSibling;
-                this.classList.toggle('collapsed');
-                list.classList.toggle('collapsed');
-            });
-            
-            // 自动处理：当年和明年折叠，其他展开
-            const yearMatch = title.textContent.match(/\d{4}/);
-            if (yearMatch) {
-                const itemYear = parseInt(yearMatch[0]);
-                if (itemYear >= currentYear) {
-                    title.classList.add('collapsed');
-                    title.nextElementSibling.classList.add('collapsed');
-                }
-            }
-        });
-        
-        // 点赞功能
-        const likeBtn = document.getElementById('like-btn');
-        if (likeBtn) {
-            likeBtn.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
-        }
-    });
-</script>
+    <script>
+        // 创建初始星空
+        const starsContainer = document.getElementById('stars-container');
+        const starCount = 80;
 
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            const size = Math.random() * 2 + 0.5;
+            const opacity = Math.random() * 0.8 + 0.2;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            
+            star.style.position = 'absolute';
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`;
+            star.style.borderRadius = '50%';
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.boxShadow = `0 0 ${size * 3}px rgba(255, 255, 255, ${opacity})`;
+            
+            if (Math.random() > 0.3) {
+                const duration = Math.random() * 2 + 1;
+                const delay = Math.random() * 1;
+                star.style.animation = `twinkle ${duration}s infinite ${delay}s alternate`;
+            }
+            
+            starsContainer.appendChild(star);
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkle {
+                0%, 100% { opacity: 0.3; }
+                50% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
-
-<!-- <p style="font-size: 11px; line-height: 1.4; color: #8c7b6c; font-family: '楷体', 'KaiTi', 'STKaiti', serif;"> -->

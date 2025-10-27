@@ -212,6 +212,7 @@
             border-radius: 8px;
             padding: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 0px;
         }
         
         .article-header {
@@ -230,7 +231,7 @@
         
         .article-content {
             font-size: 17px;
-            line-height: 1.6; /* 恢复紧凑行距 */
+            line-height: 1.6;
             color: #444;
         }
         
@@ -246,98 +247,142 @@
             border-bottom: 1px dashed #e8e1d5;
         }
         
-        /* 诗歌排版样式 */
+        /* 新的诗歌排版方案 */
         .poem-container {
-            margin: 32px 0;
-            padding: 25px;
+            margin: 2rem 0;
+            padding: 2rem;
             background: #fcfaf7;
             border-left: 3px solid #e8d9c5;
-            border-radius: 4px;
+            border-radius: 8px;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+            width: auto;
+        }
+        
+        .poem-inner-container {
+            display: table-cell;
+            text-align: center;
+            vertical-align: top;
         }
         
         .poem-title {
-            text-align: center;
-            font-size: 28px;
+            font-size: 1.8rem;
             color: #7a5c3c;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
             font-weight: 600;
+            text-align: center;
         }
         
         .poem-author {
-            text-align: center;
-            font-size: 16px;
+            font-size: 0.85rem;
             color: #9e8e7a;
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-
+        
         .poem-date {
-            text-align: center;
-            font-size: 12px;
+            font-size: 0.7rem;
             color: #9e8e7a;
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
         
         .poem-content {
-            width: 100%;
-            font-size: 16px;
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
         }
         
         .poem-stanza {
-            margin-bottom: 25px; /* 减少诗节间距 */
-            text-align: center;
+            margin-bottom: 1.5rem;
         }
         
         .poem-line {
-            text-align: center;
-            font-size: 18px;
-            line-height: 1.6; /* 恢复紧凑行距 */
+            font-size: 1.1rem;
+            line-height: 1.6;
             color: #5a4a3a;
-            margin: 2px 0; /* 减少行间距 */
+            margin: 0.2rem 0;
+            white-space: nowrap;
+            text-align: left;
         }
         
-        .article-actions {
+        .poem-explanation {
+            margin-top: 1rem;
+            padding-top: 1.0rem;
+            border-top: 1px dashed #e8e1d5;
+            font-size: 0.95rem;
+            text-align: justify;
+            line-height: 1.6;
+            color: #666;
+            width: 100%;
+        }
+
+        /* 新的导航和页脚区域 */
+        .bottom-section {
+            flex: 1;
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e8e1d5;
-            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
         }
-        
-        .btn {
+
+        .navigation {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .poem-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #7a5c3c;
+            text-decoration: none;
             padding: 8px 16px;
+            border: 1px solid #e8d9c5;
             border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
-        
-        .btn-like {
-            background: #f0ebe4;
+
+        .nav-link:hover {
+            color: #ff6600;
+            background: #fcfaf7;
+            transform: translateY(-1px);
+        }
+
+        .home-link {
+            color: #7a5c3c;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .home-link:hover {
+            color: #ff6600;
+        }
+
+        .footer {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 12px;
             color: #8c7b6c;
-        }
-        
-        .btn-like:hover, .btn-like.active {
-            background: #e8c4c4;
-            color: #b85c5c;
-        }
-        
-        .btn-comment {
-            background: #f0ebe4;
-            color: #8c7b6c;
-        }
-        
-        .btn-comment:hover {
-            background: #d4e0d4;
-            color: #5a7d5a;
+            margin: 0;
         }
         
         /* 响应式设计 */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .container {
                 flex-direction: column;
-                padding: 15px;
             }
             
             .sidebar {
@@ -345,7 +390,85 @@
                 width: 100%;
                 position: static;
             }
+            
+            .poem-line {
+                white-space: normal;
+            }
+
+            .bottom-section {
+                order: 3;
+            }
         }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .main-content, .sidebar, .navigation, .footer {
+                padding: 1.5rem;
+            }
+            
+            .poem-container {
+                padding: 1.5rem;
+                width: 100%;
+                display: block;
+            }
+            
+            .poem-inner-container {
+                display: block;
+            }
+            
+            .poem-content {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .poem-line {
+                white-space: normal;
+                text-align: center;
+            }
+
+            .poem-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+/* 添加到CSS中 */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.welcome-message {
+    font-size: 14px;
+    color: #8c7b6c;
+    font-style: italic;
+    text-align: right;
+    margin-top: 5px;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .welcome-message {
+        text-align: left;
+        margin-top: 10px;
+    }
+}
 
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -363,13 +486,13 @@
             <p style="font-size: 11px; color: #8c7b6c; text-align: center;">（注：◊表示姓名的两种语言形式镜像对应）</p>
             <p class="author-title">数学家、理论物理学家、科普诗人</p>
             <div class="author-bio">
-<p style="font-size: 11px; color: #8c7b6c; text-align: justify;">东方学帝◊X. D. Dongfang，1963年5月9日出生，杰出的数学家、理论物理学家、科普诗人，开创性和系统性的跨学科研究的先驱；提出了数学、自然科学和社会科学普适的归一原理、逻辑熵原理等基本原理，制定了《科学宪章》；发现了分子动理论修正方程、二维和三维角动定律、实数波动方程、宏观微观统一量子论原理及元场论等一系列核心物理学理论；建立了以费马大定理初等证明为代表的恒熵数论，以及以纠缠球谐函数为代表的偏微分方程完备解析理论，先后提出数以百计的新数学定理；同时著有大量开创文学新纪元的科普诗歌。因拒绝学术掠夺的潜规则，东方学帝◊X. D. Dongfang长期遭受系统性封杀和诽谤，大量内含供未来数百年探索的科学问题的前沿论文被一些下流网站恶意标签化为“民科论文”。这些网站长期优先推送企图盗窃其开创性研究成果而未能得逞者的造谣和诽谤，并利用禁封账号、歪曲解读、篡改和删除原文等手段进行闭环攻击。东方学帝◊X. D. Dongfang的意志未能被系统性诋毁、封杀和攻击所摧毁，他从未停止过深度和广度创历史新纪元的跨多领域高强度研究。东方学帝◊X. D. Dongfang的科学著作与文学创作，正持续发表于独立期刊<a href="https://mathnature.github.io" style="font-weight: bold;"">《数学与自然》</a>与独立杂志<a href="https://mathnature.github.io/Science-Window" style="font-weight: bold;"">《科学视窗》</a>，不断丰富和发展着<a href="https://mathnature.github.io/Dongfang-Scientific-Thought" style="font-weight: bold;"">东方学帝科学思想◊Dongfang Scientific Thought</a>。</p>
-<style>
-a:hover {
-    color: #ff6600;
-    text-decoration: underline;
-}
-</style>
+                <p style="font-size: 11px; color: #8c7b6c; text-align: justify;">东方学帝&#9674;X. D. Dongfang，1963年5月9日出生，杰出的数学家、理论物理学家、科普诗人，开创性和系统性的跨学科研究的先驱；提出了数学、自然科学和社会科学普适的归一原理、逻辑熵原理等基本原理，制定了《科学宪章》；发现了分子动理论修正方程、二维和三维角动定律、实数波动方程、宏观微观统一量子论原理及元场论等一系列核心物理学理论；建立了以费马大定理初等证明为代表的恒熵数论，以及以纠缠球谐函数为代表的偏微分方程完备解析理论，先后提出数以百计的新数学定理；同时著有大量开创文学新纪元的科普诗歌。因拒绝学术掠夺的潜规则，东方学帝&#9674;X. D. Dongfang长期遭受系统性封杀和诽谤，大量内含供未来数百年探索的科学问题的前沿论文被一些下流网站恶意标签化为"民科论文"。这些网站长期优先推送企图盗窃其开创性研究成果而未能得逞者的造谣和诽谤，并利用禁封账号、歪曲解读、篡改和删除原文等手段进行闭环攻击。东方学帝&#9674;X. D. Dongfang的意志未能被系统性诋毁、封杀和攻击所摧毁，他从未停止过深度和广度创历史新纪元的跨多领域高强度研究。东方学帝&#9674;X. D. Dongfang的科学著作与文学创作，正持续发表于独立期刊<a href="https://mathnature.github.io" style="font-weight: bold;">《数学与自然》</a>与独立杂志<a href="https://mathnature.github.io/Science-Window" style="font-weight: bold;">《科学视窗》</a>，不断丰富和发展着<a href="https://mathnature.github.io/Dongfang-Scientific-Thought" style="font-weight: bold;">东方学帝科学思想&#9674;Dongfang Scientific Thought</a>。</p>
+                <style>
+                    a:hover {
+                        color: #ff6600;
+                        text-decoration: underline;
+                    }
+                </style>
             </div>
             <div class="social-links">
                 <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
@@ -378,6 +501,7 @@ a:hover {
             <!-- 年卷目录 -->
             <div class="year-volumes">
                 <div class="scroll-container">
+                    <!-- 年卷目录内容保持不变 -->
                     <div class="year-item">
                         <h3 class="year-title">2025年卷</h3>
                         <ul>
@@ -388,7 +512,7 @@ a:hover {
                     <div class="year-item">
                         <h3 class="year-title">2024年卷</h3>
                         <ul>
-                            <li><a href="https://mathnature.github.io/Science-Window/SW202401.html" target="_blank">散文诗：浮云幽灵</a></li>
+                            <li><a href="https://mathnature.github.io/Science-Window/SW202401.html" target="_blank">散文诗：幽灵和伯劳</a></li>
                             <li><a href="https://mathnature.github.io/Science-Window/SW202402.html" target="_blank">报告文学：共量子论的曲折历程</a></li>
                             <li><a href="https://mathnature.github.io/Science-Window/SW202403.html" target="_blank">科学宣言：东方科学的历史使命</a></li>
                         </ul>
@@ -436,44 +560,40 @@ a:hover {
             </div>
         </aside>
         
-        <!-- 主内容区 -->
-        <main class="main-content">
-            <div id="content-area">
-
-                    <header class="article-header">
-                        <h2 class="article-title">《科学视窗》❤️心之语</h2>
-                        <div class="article-meta">
-                      <!--      <span>诗歌</span>  -->
-                        </div>
-                    </header>
-
-                <!-- 移除重复的标题，直接在诗歌容器中显示 -->
-                <article class="article-content">
-                    <div class="poem-container">
-
+        <!-- 主要内容区域 -->
+        <div class="bottom-section">
+            <!-- 主内容区 -->
+            <main class="main-content">
+                <header class="article-header">
+    	<div class="header-container">
+       	<h2 class="article-title">《科学视窗》❤️心之语</h2>
+	<div class="welcome-message" style="font-size: 13px; color: #7a5c3c; font-style: normal; letter-spacing: 0.5px;">
+   	 欢迎，天才的您，请携走所有光芒，去沐染世间万物，这便是您伟大的释义。
+	</div>
+    	</div>
+	<div class="article-meta">
+	<!-- <span>诗歌</span> -->
+	</div>
+	</header>
+               
+                <!-- 诗歌布局 -->
+                <div class="poem-container">
+                    <div class="poem-inner-container">
+                        <!-- 替换1标题开始 -->
                         <div class="poem-title">量子泪</div>
-
-<div class="poem-author">
-    东方学帝◊X. D. Dongfang
-<br>
-    <span class="poem-date">2020年6月14日</span>
-</div>
-
-<style>
-.poem-author {
-    text-align: center;
-    font-size: 14px;
-    color: #9e8e7a;
-    margin-bottom: 25px;
-    line-height: 1.4;
-}
-.poem-date {
-    font-size: 11px;
-    opacity: 0.8;
-}
-</style>
+                        <!-- 替换1标题结束 -->                    
                         
+                        <div class="poem-author">
+                            东方学帝◊X. D. Dongfang
+                            <br>
+                            <!-- 替换2日期开始 -->
+                            <span class="poem-date">2017年3月</span>
+                            <!-- 替换2日期结束 -->
+                        </div>
+                        
+                        <!-- 诗歌内容 -->
                         <div class="poem-content">
+                            <!-- 替换3文章开始 -->
                             <div class="poem-stanza">
                                 <div class="poem-line">哭吧，稻田里美丽的少女，</div>
                                 <div class="poem-line">一滴滴泪水，一粒粒珍珠。</div>
@@ -528,71 +648,62 @@ a:hover {
                                 <div class="poem-line">商人煮稀粥，冠名量子股，</div>
                                 <div class="poem-line">买股兆丰收，长流量子泪。</div>
                             </div>
+                            <!-- 替换3文章结束 -->
                         </div>
-
-<p style="text-align: justify; font-size: 15px;">
-——自从麦克斯韦方程组平面波模的通解和特解被混淆那时起，理论物理就开始犯各种各样的概念错误和计算错误，发展到近代物理，大量的虚假概念、不成立的假设、空洞的哲学思辨和虚假的数学计算充斥物理学，数不胜数。单说似乎奥妙无穷的量子力学，它起源于普朗克假设，形式上取得了一定的成功。然而，普朗克假设实际上并非普遍成立，所谓普朗克常数只不过是近似意义的常数。量子力学所构造的薛定谔方程也并不是一个精确的波动方程，而狄拉克波动方程的形式精确解在坐标原点是发散的，与波动方程的边界条件水火不容，满足边界条件的真实精确解却不能给出符合氢原子光谱精细结构的期望能级公式。无知于量子力学本质的人们联合了起来，通过举行某个会议自命权威学术团体，从而向全世界宣扬，他们用所谓的普朗克常数重新赋予了质量的定义。这，只是一场因果混淆、本末倒置、逆行倒施的拙劣表演。共量子论完美演绎自然科学逻辑，量子力学的神秘面纱将被彻底撕开，量子力学的本质不再成为困扰物理读者的难题，量子力学中大量的数学计算错误得到修正，宏观和微观量子理论获得统一，理论物理狭窄幽暗的小道从此云开雾散豁然开朗。今天，共量子论被只贪图名利的学术霸凌所封杀。那么，一百年之后呢？一百年后，共量子论定将大放光彩。兹赋诗一首，献给未来道德高尚的物理人们。
-</p>
+                        
+                        <div class="poem-explanation">
+                            <p style="text-align: justify; font-size: 14px; text-indent: 2em;">
+                                <!-- 替换4题注开始 -->
+                                ——自从麦克斯韦方程组平面波模的通解和特解被混淆那时起，理论物理就开始犯各种各样的概念错误和计算错误，发展到近代物理，大量的虚假概念、不成立的假设、空洞的哲学思辨和虚假的数学计算充斥物理学，数不胜数。单说似乎奥妙无穷的量子力学，它起源于普朗克假设，形式上取得了一定的成功。然而，普朗克假设实际上并非普遍成立，所谓普朗克常数只不过是近似意义的常数。量子力学所构造的薛定谔方程也并不是一个精确的波动方程，而狄拉克波动方程的形式精确解在坐标原点是发散的，与波动方程的边界条件水火不容，满足边界条件的真实精确解却不能给出符合氢原子光谱精细结构的期望能级公式。无知于量子力学本质的人们联合了起来，通过举行某个会议自命权威学术团体，从而向全世界宣扬，他们用所谓的普朗克常数重新赋予了质量的定义。这，只是一场因果混淆、本末倒置、逆行倒施的拙劣表演。共量子论完美演绎自然科学逻辑，量子力学的神秘面纱将被彻底撕开，量子力学的本质不再成为困扰物理读者的难题，量子力学中大量的数学计算错误得到修正，宏观和微观量子理论获得统一，理论物理狭窄幽暗的小道从此云开雾散豁然开朗。今天，共量子论被只贪图名利的学术霸凌所封杀。那么，一百年之后呢？一百年后，共量子论定将大放光彩。兹赋诗一首，献给未来道德高尚的物理人们。
+                                <!-- 替换4题注结束 -->
+                            </p>
+                        </div>
                     </div>
-                </article>
-                
-	<br>
+                </div>
+            </main>
 
-<!-- 替换5导航开始 -->
-<div class="poem-navigation" style="display: flex; justify-content: space-between; margin-top: 2rem;">
-    <a href="SW202102.html" style="color: #7a5c3c; text-decoration: none;">← 上一篇</a>
-<a href="index.html" 
-   style="color: #7a5c3c; text-decoration: none; transition: all 0.3s ease;"
-   onmouseover="this.style.color='#ff6600'; this.style.transform='translateY(-1px)'"
-   onmouseout="this.style.color='#7a5c3c'; this.style.transform='translateY(0)'">
-<p>🏠返回首页</p>
-</a>
-    <a href="SW202104.html" style="color: #7a5c3c; text-decoration: none;">下一篇 →</a>
-</div>
-<!-- 替换5导航结束 -->
-
-	<br>    
+            <!-- 导航区域 -->
+            <div class="navigation">
+                <div class="poem-navigation">
+                    <!-- 替换5导航开始 -->
+                    <a href="SW202102.html" class="nav-link">← 上一篇</a>
+                    <a href="index.html" class="home-link">🏠 返回首页</a>
+                    <a href="SW202104.html" class="nav-link">下一篇 →</a>
+                    <!-- 替换5导航结束 -->
+                </div>
             </div>
-	<p style="font-size: 12px; text-align: center;">《科学视窗》编委会 © 2021-<script>document.write(new Date().getFullYear())</script> All Rights Reserved</p>
-	<br>
-        </main>
+
+            <!-- 页脚区域 -->
+            <div class="footer">
+                <p>《科学视窗》编委会 © 2021-<script>document.write(new Date().getFullYear())</script> All Rights Reserved</p>
+            </div>
+        </div>
     </div>
 
-<script>
-// 年卷目录折叠功能
-    document.addEventListener('DOMContentLoaded', function() {
-        const yearTitles = document.querySelectorAll('.year-title');
-        const currentYear = new Date().getFullYear();
-        
-        yearTitles.forEach(title => {
-            title.addEventListener('click', function() {
-                const list = this.nextElementSibling;
-                this.classList.toggle('collapsed');
-                list.classList.toggle('collapsed');
-            });
+    <script>
+        // 年卷目录折叠功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearTitles = document.querySelectorAll('.year-title');
+            const currentYear = new Date().getFullYear();
             
-            // 自动处理：当年和明年折叠，其他展开
-            const yearMatch = title.textContent.match(/\d{4}/);
-            if (yearMatch) {
-                const itemYear = parseInt(yearMatch[0]);
-                if (itemYear >= currentYear) {
-                    title.classList.add('collapsed');
-                    title.nextElementSibling.classList.add('collapsed');
+            yearTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const list = this.nextElementSibling;
+                    this.classList.toggle('collapsed');
+                    list.classList.toggle('collapsed');
+                });
+                
+                // 自动处理：当年和明年折叠，其他展开
+                const yearMatch = title.textContent.match(/\d{4}/);
+                if (yearMatch) {
+                    const itemYear = parseInt(yearMatch[0]);
+                    if (itemYear >= currentYear) {
+                        title.classList.add('collapsed');
+                        title.nextElementSibling.classList.add('collapsed');
+                    }
                 }
-            }
-        });
-        
-        // 点赞功能
-        const likeBtn = document.getElementById('like-btn');
-        if (likeBtn) {
-            likeBtn.addEventListener('click', function() {
-                this.classList.toggle('active');
             });
-        }
-    });
-</script>
-
+        });
+    </script>
 </body>
 </html>
-
-<!-- <p style="font-size: 11px; line-height: 1.4; color: #8c7b6c; font-family: '楷体', 'KaiTi', 'STKaiti', serif;"> -->
