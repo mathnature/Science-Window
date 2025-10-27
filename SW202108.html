@@ -470,6 +470,60 @@
     }
 }
 
+/* ==================== */
+/* 诗歌行页边距优化 */
+/* ==================== */
+
+@media (max-width: 600px) {
+    /* 减少诗歌容器的左右内边距 */
+    .poem-container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* 减少主内容区的左右内边距 */
+    .main-content {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* 减少容器的左右内边距 */
+    .container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* 确保诗歌行充分利用空间 */
+    .poem-content {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/* 针对小屏幕手机的进一步优化 */
+@media (max-width: 400px) {
+    .poem-container {
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
+    }
+    
+    .main-content {
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
+    }
+    
+    .container {
+        padding-left: 0.2rem !important;
+        padding-right: 0.2rem !important;
+    }
+    
+    /* 可选：轻微调整字体大小 */
+    .poem-line {
+        font-size: 1.05rem !important;
+    }
+}
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
